@@ -48,25 +48,25 @@ def login_required(f):
     return decorated_function
 
 
-def admin_required(f):
+def super_user_required(f):
     @wraps(f)
     @login_required
     def decorated_function(*args, **kwargs):
-        if not g.user.is_administrator:
+        if not g.user.is_super_user:
             response = jsonify(message='User do not have the right permission')
-            response.status_code = 403
+            response.status_code = 401
             return response
         return f(*args, **kwargs)
     return decorated_function
 
 
-def moderator_required(f):
+def admin_required(f):
     @wraps(f)
     @login_required
     def decorated_function(*args, **kwargs):
-        if not g.user.is_moderator:
+        if not g.user.is_admin:
             response = jsonify(message='User do not have the right permission')
-            response.status_code = 403
+            response.status_code = 401
             return response
         return f(*args, **kwargs)
     return decorated_function

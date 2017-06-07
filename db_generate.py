@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 #!flask/bin/python
 from app import db
 from app.user.models import User
 from app.role.models import Role
+from app.case.models import Case
 import json
 import uuid
 
@@ -19,10 +21,18 @@ db.create_all()
 #     db.session.add(Tag(name=tag["name"].lower()))
 #     db.session.commit()
 
+alzheimer = Case(name='Alzheimer')
+pregnancy = Case(name='Grossesse')
+diabetic  = Case(name='Diabetique')
+db.session.add(alzheimer) 
+db.session.add(pregnancy) 
+db.session.add(diabetic)
+db.session.commit()
+
 # create roles
-driver_role = Role(name="driver")
 patient_role = Role(name="patient")
 doctor_role = Role(name="doctor")
+driver_role = Role(name="driver")
 admin_role = Role(name="admin")
 super_user_role = Role(name="super_user")
 db.session.add(driver_role)

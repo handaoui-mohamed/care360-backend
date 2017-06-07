@@ -1,6 +1,6 @@
 from app import api
 from flask_restplus import fields
 
-tag_model = api.model('Tag', {
+case_model = api.model('Case', {
     'name': fields.String(required=True)
 })

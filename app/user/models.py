@@ -3,15 +3,16 @@ from app import db, app
 from passlib.apps import custom_app_context as pwd_context
 from itsdangerous import (TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired)
 from app.upload.models import ProfilePicture
+from app.case.models import Case
 from config import SECRET_KEY
 
 
-# UserTag = db.Table(
-#     'UserTag',
-#     db.Column('id', db.Integer, primary_key=True),
-#     db.Column('user_id', db.String, db.ForeignKey('user.id')),
-#     db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'))
-# )
+UserCase = db.Table(
+    'UserCase',
+    db.Column('id', db.Integer, primary_key=True),
+    db.Column('user_id', db.String, db.ForeignKey('user.id')),
+    db.Column('case_id', db.Integer, db.ForeignKey('case.id'))
+)
 
 
 class User(db.Model):
@@ -24,8 +25,9 @@ class User(db.Model):
     address = db.Column(db.String(200))
     phone_number = db.Column(db.String(20))
     description = db.Column(db.Text)
+    hopital = db.Column(db.String(100))
+    cases = db.relationship('Case', secondary=UserCase, backref='user')
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
-    # tags = db.relationship('Tag', secondary=UserTag, backref='user')
     files = db.relationship('PostUpload', backref='user', lazy='dynamic')
     profile_image = db.relationship("ProfilePicture", uselist=False, backref="user")
     sent_messages = db.relationship('Message', backref='sender', lazy='dynamic')
@@ -74,18 +76,19 @@ class User(db.Model):
             'email': self.email,
             'phone_number': self.phone_number,
             'description': self.description,
-            'profile_image':  self.profile_image.to_json(self.username) if self.profile_image else None
+            'profile_image':  self.profile_image.to_json(self.username) if self.profile_image else None,
+            'cases': [element.to_json() for element in self.cases]
         }
 
-    # def add_tags(self, tags):
-    #     self.tags = []
-    #     for tag_id in tags:
-    #         self.tags.append(Tag.query.get(tag_id))
-    #     return self
+    def add_cases(self, cases):
+        self.cases = []
+        for case_id in cases:
+            self.cases.append(Case.query.get(case_id))
+        return self
 
-    # def add_tag(self, tag):
-    #     self.tags.append(tag)
-    #     return self
+    def add_case(self, case):
+        self.cases.append(case)
+        return self
 
     def __repr__(self):
         return '<User N=%s username=%s location=(%s,%s)>' % (self.id, self.username)

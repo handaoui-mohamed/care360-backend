@@ -4,17 +4,19 @@ from models import User
 from decorators import create_token, parse_token, login_required, admin_required
 from serializers import registration_model, user_login_model, profile_model, users_parser
 from forms import RegistrationForm, UpdateForm
-from app.tag.models import Tag
+from app.case.models import Case
 from flask import abort, g
 from config import YEAR, DAY
 import uuid
 
 users_api = api.namespace('users', description='All operations about USERS')
 
-@users_api.route('')
+@users_api.route('/<int:type>')
 class Users(Resource):
-    @users_api.expect(registration_model)
-    def post(self):
+
+    @users_api.expect(authorization,registration_model)
+    @login_required
+    def post(self, type=1):
         """
         Adds a new User.
         """
@@ -23,10 +25,17 @@ class Users(Resource):
         if form.validate():
             username = data.get('username')
             password = data.get('password')
-            refugee = data.get('is_refugee', False)
+            birthday = data.get('birthday')
+            description = data.get('description')
+            phone_number = data.get('phone_number')
             email = data.get('email')
-            user = User(id=uuid.uuid4().hex,username=username.lower(), email=email.lower(), refugee=refugee, role_id=1)
+            user = User(id=uuid.uuid4().hex,username=username.lower(), email=email.lower(),
+                        role_id=type,birthday=birthday,description=description,phone_number=phone_number)
             user.hash_password(password)
+
+            cases = data.get('cases')
+            if cases: user.add_cases(cases)
+
             db.session.add(user)
             db.session.commit()
             return {'element': user.to_json()}, 201
