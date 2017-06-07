@@ -1,0 +1,15 @@
+Flask
+Flask-SQLAlchemy
+passlib
+sqlalchemy-migrate
+Flask_cors
+Flask_jwt
+gunicorn
+psycopg2
+wtforms
+flask-wtf
+Flask_Login
+Flask-restplus
+wtforms_json
+gevent
+scrypt
