@@ -68,6 +68,13 @@ class User(db.Model):
         return False
 
     def to_json(self):
+        user_type = ''
+        if self.role_id == 1:
+            user_type = 'Patient'
+        elif self.role_id == 2:
+            user_type = 'Medecin'
+        else:
+            user_type = 'Administrateur'
         return {
             'id': self.id,
             'username': self.username,
@@ -79,7 +86,8 @@ class User(db.Model):
             'phone_number': self.phone_number,
             'description': self.description,
             'profile_image':  self.profile_image.to_json(self.username) if self.profile_image else None,
-            'cases': [element.to_json() for element in self.cases]
+            'cases': [element.to_json() for element in self.cases],
+            'type': user_type
         }
 
     def add_cases(self, cases):
