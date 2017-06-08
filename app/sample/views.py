@@ -6,7 +6,7 @@ from app.user.decorators import login_required
 from models import Sample
 from serializers import sample_model
 
-sample_api = api.namespace('sample', description='For showing Patient samples')
+sample_api = api.namespace('samples', description='For showing Patient samples')
 
 
 @sample_api.route('/<string:id>')

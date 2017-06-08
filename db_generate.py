@@ -35,10 +35,10 @@ doctor_role = Role(name="doctor")
 driver_role = Role(name="driver")
 admin_role = Role(name="admin")
 super_user_role = Role(name="super_user")
-db.session.add(driver_role)
 db.session.add(patient_role)
 db.session.add(doctor_role)
 db.session.add(admin_role)
+db.session.add(driver_role)
 db.session.add(super_user_role)
 db.session.commit()
 
@@ -58,4 +58,20 @@ admin_user = User(id=uuid.uuid4().hex,username="chu_admin",email="admin@chu.dz",
             first_name="CHU",last_name="Admin",role=admin_role)
 
 db.session.add(admin_user)
+db.session.commit()
+
+doctor_user = User(id=uuid.uuid4().hex,username="doctor",email="doctor@chu.dz",\
+            phone_number="023646221",description="Just a Doctor",\
+            password_hash="$5$rounds=535000$vogLSp3mAM4p/lAl$kVQleIyeJR5z0vNZgvRGWt4w1mGl4GVGQNFu62dyG93",
+            first_name="Doctor",last_name="toubib",role=doctor_role)
+doctor_user.add_cases([1])
+db.session.add(doctor_user)
+db.session.commit()
+
+patient_user = User(id=uuid.uuid4().hex,username="patient",email="patient@chu.dz",\
+            phone_number="023646221",description="Just a patient",\
+            password_hash="$5$rounds=535000$vogLSp3mAM4p/lAl$kVQleIyeJR5z0vNZgvRGWt4w1mGl4GVGQNFu62dyG93",
+            first_name="Patient",last_name="malade",role=patient_role)
+patient_user.add_cases([1,3])
+db.session.add(patient_user)
 db.session.commit()
