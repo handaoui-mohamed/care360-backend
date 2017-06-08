@@ -45,17 +45,12 @@ class Users(Resource):
             return {'element': user.to_json()}, 201
         return {"message": form.errors}, 400
 
-    @users_api.expect(users_parser)
-    def get(self):
+    @login_required
+    def get(self, type=1):
         """
         Returns all users.
         """
-        username = users_parser.parse_args()['username']
-        if not username: 
-            return {'elements': [element.to_json() for element in User.query.all()]}
-        user = User.query.filter_by(username=username).first()
-        if not user: abort(404)
-        return  {'element': user.to_json_post()}
+        return {'elements': [element.to_json() for element in User.query.filter_by(role_id=type).all()]}
 
 
 @users_api.route('/<string:id>')
