@@ -37,6 +37,7 @@ from app.user import views
 from app.upload import views
 from app.contact import views
 from app.message import views
+from app.sample import views
 
 # import models
 from app.role.models import Role
@@ -44,3 +45,4 @@ from app.user.models import User
 from app.upload.models import PostUpload, ProfilePicture
 from app.message.models import Message
 from app.contact.models import Mail
+from app.sample.models import Sample

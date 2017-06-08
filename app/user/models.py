@@ -32,6 +32,7 @@ class User(db.Model):
     files = db.relationship('PostUpload', backref='user', lazy='dynamic')
     profile_image = db.relationship("ProfilePicture", uselist=False, backref="user")
     sent_messages = db.relationship('Message', backref='sender', lazy='dynamic')
+    samples = db.relationship('Sample', backref='user', lazy='dynamic')
 
     def hash_password(self, password):
         self.password_hash = pwd_context.encrypt(password)
