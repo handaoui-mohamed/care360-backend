@@ -29,7 +29,11 @@ class Users(Resource):
             description = data.get('description')
             phone_number = data.get('phone_number')
             email = data.get('email')
+            first_name = data.get('first_name')
+            last_name = data.get('last_name')
+            address = data.get('address')
             user = User(id=uuid.uuid4().hex,username=username.lower(), email=email.lower(),
+                        first_name=first_name,last_name=last_name,address=address,
                         role_id=type,birthday=birthday,description=description,phone_number=phone_number)
             user.hash_password(password)
 

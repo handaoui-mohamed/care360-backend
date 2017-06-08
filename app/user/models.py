@@ -26,6 +26,7 @@ class User(db.Model):
     phone_number = db.Column(db.String(20))
     description = db.Column(db.Text)
     hopital = db.Column(db.String(100))
+    birthday = db.Column(db.String(10))
     cases = db.relationship('Case', secondary=UserCase, backref='user')
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
     files = db.relationship('PostUpload', backref='user', lazy='dynamic')
@@ -74,6 +75,7 @@ class User(db.Model):
             'last_name': self.last_name,
             'address': self.address,
             'email': self.email,
+            'birthday': self.birthday,
             'phone_number': self.phone_number,
             'description': self.description,
             'profile_image':  self.profile_image.to_json(self.username) if self.profile_image else None,
