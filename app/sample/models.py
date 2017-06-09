@@ -6,7 +6,7 @@ class Sample(db.Model):
 	value = db.Column(db.Float, default=0)
 	type = db.Column(db.String(20))
 	date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-	user_id = db.Column(db.String(30),db.ForeignKey('user.id'))
+	user_id = db.Column(db.String(50),db.ForeignKey('user.id'))
 
 	def to_json(self):
 		return {
