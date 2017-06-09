@@ -5,7 +5,7 @@ class Traitement(db.Model):
 	content = db.Column(db.String(100))
 	done = db.Column(db.Boolean, default=False)
 	deleted = db.Column(db.Boolean, default=False)
-	user_id = db.Column(db.String, db.ForeignKey('user.id'))
+	user_id = db.Column(db.String(30), db.ForeignKey('user.id'))
 
 	def to_json(self):
 		return {
