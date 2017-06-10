@@ -23,7 +23,7 @@ class Users(Resource):
         data = api.payload
         form = RegistrationForm.from_json(data)
         if form.validate():
-            username = data.get('username')
+            username = data.get('username',)
             password = data.get('password')
             birthday = data.get('birthday')
             description = data.get('description')
@@ -79,13 +79,13 @@ class Login(Resource):
         Used to login a user, returns Token and User.
         """
         data = api.payload
-        username = data.get('username').lower()
-        password = data.get('password')
+        username = data.get('username',"").lower()
+        password = data.get('password',"")
         remember_me = data.get('remember_me', False)
         duration = DAY if not remember_me else YEAR
         user = User.query.filter_by(username=username).first()
         if not user or not user.verify_password(password):
-            abort(404)
+            return {"message": "Nom d'utilisateur ou mot de passe incorrecte"},404
         g.user = user
         token = create_token(g.user, duration)
         return {'token': token.decode('ascii'), 'user': g.user.to_json()}

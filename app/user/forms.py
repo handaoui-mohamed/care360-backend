@@ -15,7 +15,7 @@ class RegistrationForm(FlaskForm):
         validators.Email('L\'addresse Email doit être valide')
     ])
     password = PasswordField('password', validators=[
-        Length(min=8, message="Le nom mot de passe doit être > 8 caractères"),
+        Length(min=8, message="Le mot de passe doit être > 8 caractères"),
         DataRequired('Le mot de passe est nécessaire')
     ])
 
