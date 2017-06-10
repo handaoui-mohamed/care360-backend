@@ -1,0 +1,45 @@
+[{
+	"id": 1,
+	"value": 2.1,
+	"type": "glycemie"
+}, {
+	"id": 2,
+	"value": 7.1,
+	"type": "tension"
+}, {
+	"id": 3,
+	"value": 72.1,
+	"type": "poids"
+}, {
+	"id": 4,
+	"value": 2.7,
+	"type": "glycemie"
+}, {
+	"id": 5,
+	"value": 2,
+	"type": "glycemie"
+}, {
+	"id": 6,
+	"value": 8,
+	"type": "tension"
+}, {
+	"id": 7,
+	"value": 8.3,
+	"type": "tension"
+}, {
+	"id": 8,
+	"value": 8.2,
+	"type": "tension"
+}, {
+	"id": 9,
+	"value": 71.2,
+	"type": "poids"
+}, {
+	"id": 10,
+	"value": 3.2,
+	"type": "glycemie"
+}, {
+	"id": 11,
+	"value": 8.1,
+	"type": "tension"
+}]

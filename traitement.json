@@ -1,0 +1,36 @@
+[{
+	"id": 1,
+	"content": "Prise de tension",
+	"done": false,
+	"deleted": false
+}, {
+	"id": 2,
+	"content": "Prise de glycemie",
+	"done": true,
+	"deleted":false
+}, {
+	"id": 3,
+	"content": "Prise de glycemie",
+	"done": true,
+	"deleted":true
+}, {
+	"id": 4,
+	"content": "Prise de poids",
+	"done": false,
+	"deleted":false
+}, {
+	"id": 5,
+	"content": "2 comprimés du Glimepiride par Jours",
+	"done": false,
+	"deleted":false
+}, {
+	"id": 6,
+	"content": "1 comprimés du Glipizide pendant un mois",
+	"done": true,
+	"deleted":false
+}, {
+	"id": 7,
+	"content": "Prise de poids",
+	"done": true,
+	"deleted":false
+}]
