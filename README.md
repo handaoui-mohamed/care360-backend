@@ -22,13 +22,9 @@
 
         pip install -r requirements.txt
 
-7- Create DataBase: 
+7- Generate DataBase/Fakers: 
     
-        python db_create.py
-
-8- Add Tags to DB: 
-    
-        python db_add_tags.py
+        python db_generate.py
 
 9- Run server on dev mode: 
 
@@ -37,23 +33,3 @@
 10- Run server on prod mode: 
 
         python runp.py
-
-
-
-
-## Git
-
-1- Clone repo
-
-2- Work in dev branch: 
-
-        git checkout develop
-
-3- Push: 
-    
-        git push origin develop
-
-4- Pill: 
-
-        git pull --rebase
-
